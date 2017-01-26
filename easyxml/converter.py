@@ -8,6 +8,17 @@ from functools import partial
 
 class EasyXmlConverter(object):
 
+    def _textify(self, elem):
+        elem.text = ''
+        elem.tail = ''
+        return elem
+
+    def mkelem(self, *args, **kwds):
+        return self._textify(Element(*args, **kwds))
+
+    def mksub(self, *args, **kwds):
+        return self._textify(SubElement(*args, **kwds))
+
     def reprstag(self, x):
         """Determines if the object `x` represents a tag.
 
@@ -34,16 +45,16 @@ class EasyXmlConverter(object):
             else:
                 children = chain((maybe_attribs,), it)
                 attribs = {}
-        make = Element if parent is None else partial(SubElement, parent)
+        make = self.mkelem if parent is None else partial(self.mksub, parent)
         elem = make(name, attribs)
         last = None
         for child in children:
             if self.reprstag(child):
                 last = self.elements(child, elem)
             elif last is None:
-                elem.text = child
+                elem.text += child
             else:
-                last.tail = child
+                last.tail += child
         return elem
 
     def dump(self, node):
