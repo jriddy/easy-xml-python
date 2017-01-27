@@ -24,3 +24,16 @@ class ConverterTester(unittest.TestCase):
         with strio() as f:
             dump(['root'], f)
             self.assertEqual('<root />\n', f.getvalue())
+
+    def test_simple_html(self):
+        doc = ['html',
+               ['head',
+                ['title', 'Sample Page'],
+                ['style', {'type': 'text/css'},
+                 'body { background-color: #ddddd; } '
+                 '.red { color: #ff0000; }']],
+               ['body',
+                ['h1', 'Example HTML'],
+                ['p', {'class': 'red'}, 'Lots of text']]]
+        text = '<html><head><title>Sample Page</title><style type="text/css">body { background-color: #ddddd; } .red { color: #ff0000; }</style></head><body><h1>Example HTML</h1><p class="red">Lots of text</p></body></html>'
+        self.assertEqual(dumps(doc), text)
