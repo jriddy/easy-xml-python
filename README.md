@@ -21,7 +21,7 @@ like this:
            ['head',
             ['title', 'Sample Page'],
             ['style', {'type': 'text/css'},
-             'body { background-color: #ddddd; } '
+             'body { background-color: #dddddd; } '
              '.red { color: #ff0000; }']],
            ['body',
             ['h1', 'Example HTML'],
