@@ -1,5 +1,7 @@
 """Converts a iterable and dict-based structure to element trees.
 """
+from __future__ import print_function
+
 from xml.etree import ElementTree as ET
 from xml.etree.ElementTree import Element, SubElement
 from itertools import chain
@@ -57,5 +59,8 @@ class EasyXmlConverter(object):
                 last.tail += child
         return elem
 
-    def dump(self, node):
+    def dump(self, node, fp=None):
+        print(self.dumps(node), file=fp)
+
+    def dumps(self, node):
         return ET.tostring(self.elements(node))
