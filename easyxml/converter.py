@@ -8,6 +8,8 @@ from itertools import chain
 from functools import partial
 
 
+def product(a, b): return a * b
+
 class EasyXmlConverter(object):
 
     def _textify(self, elem):
