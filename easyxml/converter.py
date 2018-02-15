@@ -8,7 +8,9 @@ from itertools import chain
 from functools import partial
 
 
-def product(a, b): return a * b
+def product(a, b):
+    return a * b
+
 
 class EasyXmlConverter(object):
 
